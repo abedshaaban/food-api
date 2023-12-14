@@ -13,13 +13,23 @@ class BagController extends Controller
         $this->user = Auth::user();
     }
 
-    public function create_bag(Request $request){
+    public function create_bag(){
         $token_data = auth()->payload();
 
-        $food = Bag::create([
+        $bag = Bag::create([
             'user_id'=>$token_data['uuid'],
         ]);     
 
-        return response()->json($food);
+        return response()->json($bag);
+    }
+
+    public function get_all_bags(){
+        $token_data = auth()->payload();
+
+        $bag = Bag::select('id')
+        ->where('user_id', $token_data['uuid'])
+        ->get();    
+
+        return response()->json($bag);
     }
 }
