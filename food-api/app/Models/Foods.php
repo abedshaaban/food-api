@@ -10,6 +10,7 @@ class Foods extends Model
     use HasFactory;
 
     public $timestamps = false;
+    public $incrementing = false;
 
     protected $fillable = [
         'id',

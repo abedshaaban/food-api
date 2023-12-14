@@ -25,4 +25,25 @@ class FoodController extends Controller
         return response()->json($food);
     }
 
+    public function get_all_food(Request $request){
+        $token_data = auth()->payload();
+
+        $food = Foods::select('id', 'name', 'description', 'price')
+        ->where('user_id', $token_data['uuid'])
+        ->get();  
+
+        return response()->json($food);
+    }
+
+    public function delete_food_by_id(Request $request){
+        $token_data = auth()->payload();
+
+        $food = Foods::
+        where('user_id', $token_data['uuid'])
+        ->where('id', $request->id)
+        ->delete();  
+
+        return response()->json($food);
+    }
+
 }
