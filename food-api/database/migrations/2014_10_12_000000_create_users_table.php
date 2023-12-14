@@ -16,14 +16,28 @@ return new class extends Migration
             $table->string('name');
         });
 
+        DB::table('roles')->insert([
+            [ 
+             'name' => 'user',
+             ],
+            [ 
+             'name' => 'seller',
+             ],
+            [ 
+             'name' => 'admin',
+             ],
+             
+         ]);
+
         Schema::create('users', function (Blueprint $table) {
             $table->uuid()->default(DB::raw('(UUID())'))->primary();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('first_name')->default('');
-            $table->string('last_name')->default('');
-            $table->string('phone_number')->default('');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone_number')->nullable();
             $table->foreignId('role_id')
+            ->default(1)
             ->references('id')
             ->on('roles')
             ->onDelete('cascade');
