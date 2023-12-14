@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\BagController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,11 @@ Route::controller(AddressController::class)->group(function () {
     Route::post('/user/address/delete/{id}', 'delete_address_by_id');
     Route::post('/user/address/delete-all', 'delete_all_addresses');
     Route::post('/user/address/update/{id}', 'update_address_by_id');
+
+});
+
+Route::controller(BagController::class)->group(function () {
+    Route::post('/user/bag/create', 'create_bag');
 
 });
 
