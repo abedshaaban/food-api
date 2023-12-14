@@ -30,6 +30,6 @@ Route::controller(AddressController::class)->group(function () {
 });
 
 Route::middleware(['auth:api', 'seller.check'])->group(function () {
-    Route::post('/seller/food',  [FoodController::class, 'create_food']);
+    Route::post('/seller/food/create',  [FoodController::class, 'create_food']);
 
 });
