@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
+
+Route::get('/food',  [PublicController::class, 'get_public_food']);
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
