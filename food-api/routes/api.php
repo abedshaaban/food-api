@@ -22,5 +22,6 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(AddressController::class)->group(function () {
     Route::post('/user/address/create', 'create_address');
     Route::post('/user/address/get', 'get_addresses');
+    Route::post('/user/address/delete/{id}', 'delete_address_by_id');
 
 });

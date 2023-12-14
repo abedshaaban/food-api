@@ -34,8 +34,17 @@ class AddressController extends Controller
         ->where('user_id', $token_data['uuid'])
         ->get();
 
-       
-
         return response()->json($addresses_list);
+    }
+
+    public function delete_address_by_id($id){
+        $token_data = auth()->payload();
+
+        $address = Address::
+        where('user_id', $token_data['uuid'])
+        ->where('id', $id)
+        ->delete();
+
+        return response()->json($address);
     }
 }
