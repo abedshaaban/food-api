@@ -18,7 +18,7 @@ class UserController extends Controller
         $token_data = auth()->payload();
 
         $user = User::
-        select('uuid', 'email', 'first_name', 'last_name', 'phone_number')
+        select('uuid', 'email', 'first_name', 'last_name', 'phone_number', 'role_id')
         ->where('email', $token_data['email'])->first();
 
         $user->update([
@@ -26,6 +26,16 @@ class UserController extends Controller
             "last_name" => $request->last_name ?? $user->last_name,
             "phone_number" => $request->phone_number ?? $user->phone_number
         ]);
+
+        return response()->json($user);
+    }
+
+    public function get_user_by_token(Request $request){
+        $token_data = auth()->payload();
+
+        $user = User::
+        select('uuid', 'email', 'first_name', 'last_name', 'phone_number', 'role_id')
+        ->where('email', $token_data['email'])->first();
 
         return response()->json($user);
     }
