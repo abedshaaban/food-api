@@ -57,4 +57,21 @@ class AddressController extends Controller
 
         return response()->json($address);
     }
+
+    public function update_address_by_id(Request $request, $id){
+        $token_data = auth()->payload();
+
+        $address = Address::
+        where('user_id', $token_data['uuid'])
+        ->where('id', $id)
+        ->first();
+
+        $address->update([
+            'country' => $request->country ?? $address->country,
+            'city' => $request->city ?? $address->city,
+            'zip_code' => $request->zip_code ?? $address->zip_code,
+        ]);
+
+        return response()->json($address);
+    }
 }
