@@ -37,7 +37,8 @@ Route::controller(AddressController::class)->group(function () {
 Route::controller(BagController::class)->group(function () {
     Route::post('/user/bag/create', 'create_bag');
     Route::post('/user/bag/get', 'get_all_bags');
-    // Route::post('/user/bag/add/{product_id}/{quantity}', 'add_item_to_bag');
+    Route::post('/user/bag/delete-all', 'delete_all_bags');
+    Route::post('/user/bag/delete/{id}', 'delete_bag_by_id');
 
 });
 

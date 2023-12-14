@@ -32,4 +32,25 @@ class BagController extends Controller
 
         return response()->json($bag);
     }
+
+    public function delete_all_bags(){
+        $token_data = auth()->payload();
+
+        $bag = Bag::
+        where('user_id', $token_data['uuid'])
+        ->delete();
+
+        return response()->json($bag);
+    }
+ 
+    public function delete_bag_by_id($id){
+        $token_data = auth()->payload();
+
+        $bag = Bag::
+        where('user_id', $token_data['uuid'])
+        ->where('id', $id)
+        ->delete();
+
+        return response()->json($bag);
+    }
 }
