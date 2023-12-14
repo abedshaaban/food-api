@@ -21,9 +21,17 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
+        if((int)$request->role !== 1 && (int)$request->role !== 2){
+            return  response()->json([
+                'status' => 'error',
+                'message' => 'bad params sent'
+            ]);
+        }
+
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => (int)$request->role ?? 1,
         ]);
 
         $token = Auth::login($user);
