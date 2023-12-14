@@ -46,4 +46,14 @@ class FoodController extends Controller
         return response()->json($food);
     }
 
+    public function delete_all_food(){
+        $token_data = auth()->payload();
+
+        $food = Foods::
+        where('user_id', $token_data['uuid'])
+        ->delete();  
+
+        return response()->json($food);
+    }
+
 }

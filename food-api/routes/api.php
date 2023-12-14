@@ -33,5 +33,6 @@ Route::middleware(['auth:api', 'seller.check'])->group(function () {
     Route::post('/seller/food/create',  [FoodController::class, 'create_food']);
     Route::post('/seller/food/get',  [FoodController::class, 'get_all_food']);
     Route::post('/seller/food/delete-item',  [FoodController::class, 'delete_food_by_id']);
+    Route::post('/seller/food/delete-all',  [FoodController::class, 'delete_all_food']);
 
 });
