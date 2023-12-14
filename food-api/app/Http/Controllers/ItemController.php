@@ -22,4 +22,21 @@ class ItemController extends Controller
 
         return response()->json($item);
     }
+
+    public function get_items_from_bag(Request $request){
+        $item = ItemBag::select('id', 'quantity', 'foods.name', 'foods.description', 'foods.price')
+        ->join('foods', 'bag_items.food_id','=','foods.id')
+        ->where('bag_id', $request->id)
+        ->get();  
+
+        return response()->json($item);
+    }
+
+    public function remove_item_from_bag(Request $request){
+        $item = ItemBag::
+        where('id', $request->id)
+        ->delete(); 
+
+        return response()->json($item);
+    }
 }

@@ -45,6 +45,8 @@ Route::controller(BagController::class)->group(function () {
 
 Route::controller(ItemController::class)->group(function () {
     Route::post('/user/bag/add', 'add_item_to_bag');
+    Route::post('/user/bag/remove', 'remove_item_from_bag');
+    Route::post('/user/bag/get-items', 'get_items_from_bag');
 
 });
 
