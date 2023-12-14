@@ -56,4 +56,21 @@ class FoodController extends Controller
         return response()->json($food);
     }
 
+    public function update_food_by_id(Request $request){
+        $token_data = auth()->payload();
+
+        $food = Foods::
+        where('user_id', $token_data['uuid'])
+        ->where('id', $request->id)
+        ->first();
+
+        $food->update([
+            'name' => $request->name ?? $food->name,
+            'description' => $request->description ?? $food->description,
+            'price' => $request->price ?? $food->price,
+        ]);
+
+        return response()->json($food);
+    }
+
 }
