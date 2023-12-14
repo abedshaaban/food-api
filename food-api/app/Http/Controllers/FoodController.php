@@ -12,5 +12,10 @@ class FoodController extends Controller
         $this->user = Auth::user();
     }
 
-   
+    public function create_food(Request $request){
+        $token_data = auth()->payload();
+
+        return response()->json($token_data);
+    }
+
 }

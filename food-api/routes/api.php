@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -25,5 +26,10 @@ Route::controller(AddressController::class)->group(function () {
     Route::post('/user/address/delete/{id}', 'delete_address_by_id');
     Route::post('/user/address/delete-all', 'delete_all_addresses');
     Route::post('/user/address/update/{id}', 'update_address_by_id');
+
+});
+
+Route::middleware(['auth:api', 'seller.check'])->group(function () {
+    Route::post('/seller/food',  [FoodController::class, 'create_food']);
 
 });
